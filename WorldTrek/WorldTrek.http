@@ -1,0 +1,6 @@
+@WorldTrek_HostAddress = http://localhost:5169
+
+GET {{WorldTrek_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

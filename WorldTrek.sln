@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldTrek", "WorldTrek\WorldTrek.csproj", "{BFBCBE50-6414-48F2-B06D-881F8918DC2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFBCBE50-6414-48F2-B06D-881F8918DC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFBCBE50-6414-48F2-B06D-881F8918DC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFBCBE50-6414-48F2-B06D-881F8918DC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFBCBE50-6414-48F2-B06D-881F8918DC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DED5CC3-A5E4-4FC1-9B2B-E39D35A29033}
+	EndGlobalSection
+EndGlobal
