@@ -2,16 +2,16 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorldTrek - Plataforma de Gestión de Viajes Internacionales</title>
+    <meta name="viewport" content="with=device-width, initial-scale=1.0" />
+    <title>WorlTrek - Login</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 400px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #2746F5;
-            color: #fff
+            background-color: #1a1a1a;
         }
 
         .container {
@@ -37,7 +37,7 @@
             color: #ccc;
         }
 
-        input[type="text"], input[type="email"], input[type="password"] {
+        input[type="email"], input[type="password"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #555;
@@ -65,7 +65,7 @@
 
             button:disabled {
                 background-color: #666;
-                cursor: not-allowed
+                cursor: not-allowed;
             }
 
         .message {
@@ -84,7 +84,6 @@
             background-color: #f44336;
             color: white;
         }
-
 
         .loading {
             display: none;
@@ -105,80 +104,59 @@
                 .links a:hover {
                     text-decoration: underline;
                 }
-
     </style>
 </head>
 <body>
-
     <div class="container">
-        <h1>Bienvenido a WorldTrek</h1>
+        <h1>Iniciar sesion</h1>
 
-
-        <form id="registerForm">
-
-
-            <div class="form-group">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
-
             <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required minlength="6">
+                <label for="password">Contrasenia:</label>
+                <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit" id="submitBtn">Registrarse</button>
-
+            <button type="submit" id="loginBtn">Iniciar Sesion</button>
         </form>
 
-        <div class="links">
-            <a href="/login.html">Ya tienes cuenta? Inicia sesion</a>
-        </div>
-
         <div class="loading" id="loading">
-            Registrando usuario...
+            Iniciando Sesion...
         </div>
 
-        <div id="message">
+        <div id="message"></div>
 
+        <div class="links">
+            <a href="/">No tienes cuenta? Registrate</a>
         </div>
     </div>
 
-
-    <script>
-        const API_BASE_URL = 'http://localhost:7236/api';
-        document.getElementById('registerForm').addEventListener('submit', async function (e) {
+    <script>const API_BASE_URL = 'http://localhost:7235/api';
+        document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
-            const submitBtn = document.getElementById('submitBtn');
+            const loginBtn = document.getElementById('loginBtn');
             const loading = document.getElementById('loading');
             const messageDiv = document.getElementById('message');
 
-
-            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-
-            submitBtn.disabled = true;
+            loginBtn.disabled = true;
             loading.style.display = 'block';
             messageDiv.innerHTML = '';
 
             try {
-                const response = await fetch(`${API_BASE_URL}/Auth/register`, {
+                const response = await fetch(`${API_BASE_URL}/Auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-
                     body: JSON.stringify({
-                        name: name,
                         email: email,
                         password: password
                     })
@@ -187,29 +165,32 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    messageDiv.innerHTML = `<div class="message success">
+                                            Login Exitoso, Redirigiendo...
+                                            </div>`;
 
-                    messageDiv.innerHTML = `<div class="message success"> Usuario Registrado <br>
-                                                    <strong>ID:</strong> ${data.userId} <br>
-                                                     <strong>Email:</strong> ${data.email} <br>
-                                                    </div>`;
+                    //Guardar el token (simulado) en localstorage
+                    localStorage.setItem('userToken', data.token || 'mock-token');
+                    localStorage.setItem('userData', JSON.stringify(data.user));
 
-                    document.getElementById("registerForm").reset();
+                    //Redirigir al dashboard despues de 2 segundos
+                    setTimeout(() => {
+                        window.location.href = '/dashboard.html';
+                    }, 2000);
+
                 } else {
-                    messageDiv.innerHTML = `<div class="message error"> Error: ${data.message || 'Error desconocido'} </div>`;
+                    messageDiv.innerHTML = `<div class="message error">
+                                           ${data.message || 'Credenciales incorrectas'}
+                                           </div>`
                 }
-
             } catch (error) {
-                messageDiv.innerHTML = `<div class="message error"> Error de conexion ${error.message} </div>`;
-
-
+                messageDiv.innerHTML = `<div class="message error">
+                                            Error de conexion: ${error.message}
+                                            </div>`
             } finally {
-                submitBtn.disabled = false;
+                loginBtn.disabled = false;
                 loading.style.display = 'none';
             }
-
-        })
-
-    </script>
-
+        });</script>
 </body>
 </html>
