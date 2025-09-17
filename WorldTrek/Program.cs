@@ -1,4 +1,4 @@
-using WorldTrek.Services;
+﻿using WorldTrek.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,10 +36,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+
+app.UseCors("AllowAll");  // ← CORS antes que Authorization y MapControllers
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers();     // ← después de UseCors
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
