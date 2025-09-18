@@ -42,6 +42,17 @@ app.UseAuthorization();
 
 app.MapControllers();     // ← después de UseCors
 app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseStaticFiles(); // ya debe estar
+
+// Redirigir cualquier ruta que empiece con /app a index.html de Angular
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/app") &&
+        !System.IO.Path.HasExtension(context.Request.Path.Value))
+    {
+        context.Request.Path = "/app/index.html";
+    }
+    await next();
+});
 
 app.Run();
