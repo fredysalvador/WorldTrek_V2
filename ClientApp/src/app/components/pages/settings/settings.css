@@ -1,0 +1,20 @@
+.settings-card {
+  border-radius: 15px;
+}
+
+.settings-card .form-label {
+  font-weight: 500;
+}
+
+.settings-card .input-group-text {
+  background-color: #fff3cd;
+  border-right: 0;
+}
+
+.settings-card input.form-control {
+  border-left: 0;
+}
+
+.settings-card select.form-select {
+  border-radius: 8px;
+}

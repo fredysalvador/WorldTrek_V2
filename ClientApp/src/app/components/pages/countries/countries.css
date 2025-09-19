@@ -1,0 +1,79 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.header {
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ddd;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+input[type="search"] {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.country-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.country-table th,
+.country-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.flag-img {
+  width: 40px;
+  height: auto;
+}
+
+button.fav {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ccc;
+}
+
+button.fav.active {
+  color: gold;
+}
+
+.drop-row {
+  background-color: #f9f9f9;
+}
+
+.drop-content {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.footer {
+  background-color: #222;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}

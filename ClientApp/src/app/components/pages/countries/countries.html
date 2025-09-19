@@ -1,0 +1,50 @@
+<div class="page-wrapper">
+  <header class="header">
+    <h1>🌍 Países del Mundo</h1>
+    <div class="controls">
+      <input type="search" [(ngModel)]="search" (input)="filtrar()" placeholder="Buscar país..." />
+      <label>
+        <input type="checkbox" [(ngModel)]="onlyFavs" (change)="filtrar()" />
+        Solo favoritos
+      </label>
+    </div>
+  </header>
+
+  <main class="content">
+    <table class="country-table">
+      <thead>
+        <tr>
+          <th>Bandera</th>
+          <th>Nombre</th>
+          <th>Favorito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let pais of filtrados">
+          <tr (click)="toggleDrop(pais.cca3)" class="main-row">
+            <td><img [src]="pais.flags.svg" [alt]="pais.name.common" class="flag-img" /></td>
+            <td>{{ pais.name.common }}</td>
+            <td>
+              <button class="fav" [class.active]="esFavorito(pais.cca3)" (click)="toggleFavorito(pais.cca3); $event.stopPropagation()">★</button>
+            </td>
+          </tr>
+          <tr *ngIf="dropActivo === pais.cca3" class="drop-row">
+            <td colspan="3">
+              <div class="drop-content">
+                <p><strong>Capital:</strong> {{ pais.capital?.[0] || 'N/A' }}</p>
+                <p><strong>Región:</strong> {{ pais.region }}</p>
+                <p><strong>Población:</strong> {{ pais.population | number }}</p>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </main>
+
+  <footer class="footer bg-dark text-white py-4 mt-auto">
+    <div class="container text-center">
+      <small>&copy; 2025 Mi Aplicación. Todos los derechos reservados.</small>
+    </div>
+  </footer>
+</div>

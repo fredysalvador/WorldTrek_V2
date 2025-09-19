@@ -1,0 +1,54 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg p-4 settings-card">
+        <div class="text-center mb-4">
+          <i class="fas fa-cogs fa-3x text-warning"></i>
+          <h3 class="mt-2">Configuración de Usuario</h3>
+          <p class="text-muted">Actualiza tu información personal y preferencias</p>
+        </div>
+        <form>
+          <!-- Nombre -->
+          <div class="mb-3">
+            <label class="form-label">Nombre completo</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="Tu nombre">
+            </div>
+          </div>
+          
+          <!-- Correo -->
+          <div class="mb-3">
+            <label class="form-label">Correo electrónico</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              <input type="email" class="form-control" placeholder="ejemplo@correo.com">
+            </div>
+          </div>
+          
+          <!-- Contraseña -->
+          <div class="mb-3">
+            <label class="form-label">Nueva contraseña</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              <input type="password" class="form-control" placeholder="••••••••">
+            </div>
+          </div>
+
+          <!-- Preferencias -->
+          <div class="mb-3">
+            <label class="form-label">Preferencias</label>
+            <select class="form-select">
+              <option selected>Selecciona un tema</option>
+              <option value="1">Claro</option>
+              <option value="2">Oscuro</option>
+              <option value="3">Colorido</option>
+            </select>
+          </div>
+
+          <button class="btn btn-warning w-100 mt-3">Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

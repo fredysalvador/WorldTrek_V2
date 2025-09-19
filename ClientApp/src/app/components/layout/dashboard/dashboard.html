@@ -1,0 +1,38 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1 class="display-4 fw-bold text-primary">
+        <i class="fas fa-tachometer-alt me-2"></i> Centro de Control
+      </h1>
+      <p class="lead mt-3 text-muted">
+        ¡Bienvenido! Este es tu espacio para tomar decisiones, gestionar tu aplicación y mantener todo bajo control.
+      </p>
+
+      <!-- Botones para seleccionar la sección -->
+      <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap">
+        <button class="btn btn-primary btn-lg" (click)="toggle('user')">
+          <i class="fas fa-users me-2"></i> Gestionar Usuarios
+        </button>
+        <button class="btn btn-warning btn-lg text-dark" (click)="toggle('settings')">
+          <i class="fas fa-cogs me-2"></i> Ajustes del Sistema
+        </button>
+        <button class="btn btn-info btn-lg text-white" (click)="toggle('countries')">
+          <i class="fas fa-globe-americas me-2"></i> Países y Regiones
+        </button>
+      </div>
+
+      <!-- Contenedores de los componentes, solo se muestra uno a la vez -->
+      <div class="dashboard-components mt-4">
+        <app-user *ngIf="showUser"></app-user>
+        <app-settings *ngIf="showSettings"></app-settings>
+        <app-countries *ngIf="showCountries"></app-countries>
+      </div>
+
+      <div class="mt-5">
+        <p class="text-secondary fst-italic">
+          “La administración efectiva no es solo controlar, sino empoderar.” 🌟
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
