@@ -1,4 +1,6 @@
 ﻿using Google.Cloud.Firestore;
+using System;
+using System.Collections.Generic;
 
 namespace WorldTrek.Models
 {
@@ -7,21 +9,21 @@ namespace WorldTrek.Models
     {
         [FirestoreProperty]
         public string Id { get; set; } = string.Empty;
-        
-        [FirestoreProperty]
-        public string Email { get; set; }
 
         [FirestoreProperty]
-        public string Name { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [FirestoreProperty]
-        public DateTime CreatedAt { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [FirestoreProperty]
-        public List<string> FavoriteCharacters { get; set; } = new List<string>();
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [FirestoreProperty]
-        public List<string> FavoritePlanets { get; set; } = new List<string>();
+        public List<string> FavoriteCountries { get; set; } = new List<string>();
+
+        [FirestoreProperty]
+        public List<Viaje> Viajes { get; set; } = new List<Viaje>();
 
         [FirestoreProperty]
         public string PasswordHash { get; set; } = string.Empty;
