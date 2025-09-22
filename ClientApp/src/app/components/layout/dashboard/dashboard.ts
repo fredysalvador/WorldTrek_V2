@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../../pages/user/user';
 import { Countries } from '../../pages/countries/countries';
 import { Settings } from '../../pages/settings/settings';
+import { Trips } from '../../pages/trips/trips';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, User, Countries, Settings],  
+  imports: [CommonModule, Countries, Settings, Trips],  
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })
 export class Dashboard {
-  showUser = false;
-  showSettings = false;
-  showCountries = false;
+  mostrarViajes = false;
+  mostrarAjustes = false;
+  mostrarPaises = false;
 
-  toggle(component: string) {
-    this.showUser = component === 'user';
-    this.showSettings = component === 'settings';
-    this.showCountries = component === 'countries';
+  alternar(seccion: string) {
+    this.mostrarViajes = seccion === 'viajes';
+    this.mostrarAjustes = seccion === 'ajustes';
+    this.mostrarPaises = seccion === 'paises';
   }
 }

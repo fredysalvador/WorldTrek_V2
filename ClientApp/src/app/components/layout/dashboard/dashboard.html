@@ -8,30 +8,31 @@
         ¡Bienvenido! Este es tu espacio para tomar decisiones, gestionar tu aplicación y mantener todo bajo control.
       </p>
 
-      <!-- Botones para seleccionar la sección -->
+      <!-- Botones -->
       <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap">
-        <button class="btn btn-primary btn-lg" (click)="toggle('user')">
-          <i class="fas fa-users me-2"></i> Gestionar Usuarios
+        <button class="btn btn-success btn-lg" (click)="alternar('viajes')">
+          <i class="fas fa-plane me-2"></i> Nuevo Viaje
         </button>
-        <button class="btn btn-warning btn-lg text-dark" (click)="toggle('settings')">
+        <button class="btn btn-warning btn-lg text-dark" (click)="alternar('ajustes')">
           <i class="fas fa-cogs me-2"></i> Ajustes del Sistema
         </button>
-        <button class="btn btn-info btn-lg text-white" (click)="toggle('countries')">
+        <button class="btn btn-info btn-lg text-white" (click)="alternar('paises')">
           <i class="fas fa-globe-americas me-2"></i> Países y Regiones
         </button>
       </div>
 
-      <!-- Contenedores de los componentes, solo se muestra uno a la vez -->
+      <!-- Contenedores -->
       <div class="dashboard-components mt-4">
-        <app-user *ngIf="showUser"></app-user>
-        <app-settings *ngIf="showSettings"></app-settings>
-        <app-countries *ngIf="showCountries"></app-countries>
-      </div>
+        <app-trips *ngIf="mostrarViajes"></app-trips>
+        <app-settings *ngIf="mostrarAjustes"></app-settings>
+        <app-countries *ngIf="mostrarPaises"></app-countries>
 
-      <div class="mt-5">
+ <div class="mt-5">
         <p class="text-secondary fst-italic">
           “La administración efectiva no es solo controlar, sino empoderar.” 🌟
         </p>
+      </div>
+
       </div>
     </div>
   </div>
