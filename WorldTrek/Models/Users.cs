@@ -20,12 +20,6 @@ namespace WorldTrek.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [FirestoreProperty]
-        public List<string> FavoriteCountries { get; set; } = new List<string>();
-
-        [FirestoreProperty]
-        public List<Viaje> Viajes { get; set; } = new List<Viaje>();
-
-        [FirestoreProperty]
         public string PasswordHash { get; set; } = string.Empty;
     }
 }

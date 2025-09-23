@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Countries } from '../../pages/countries/countries';
+import { CountriesComponent } from '../../pages/countries/countries';
 import { SettingsComponent } from '../../pages/settings/settings';
-import { Trips } from '../../pages/trips/trips';
+import { TripsComponent } from '../../pages/trips/trips';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-imports: [CommonModule, Countries, SettingsComponent, Trips],
+imports: [CommonModule, CountriesComponent, SettingsComponent, TripsComponent],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css']
 })

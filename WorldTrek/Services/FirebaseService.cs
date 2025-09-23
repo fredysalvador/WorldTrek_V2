@@ -121,5 +121,52 @@ namespace WorldTrek.Services
             }
             return users;
         }
+
+        // Guardar favoritos de países por usuario
+        public async Task SaveFavoriteCountriesAsync(string userId, List<string> countries)
+        {
+            var docRef = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("favorites").Document("countries");
+            await docRef.SetAsync(new { list = countries });
+        }
+
+        // Obtener favoritos de países por usuario
+        public async Task<List<string>> GetFavoriteCountriesAsync(string userId)
+        {
+            var docRef = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("favorites").Document("countries");
+            var snapshot = await docRef.GetSnapshotAsync();
+
+            if (!snapshot.Exists) return new List<string>();
+            return snapshot.ContainsField("list")
+                ? snapshot.GetValue<List<string>>("list")
+                : new List<string>();
+        }
+
+        // Guardar viaje por usuario
+        public async Task<string> SaveTripAsync(string userId, Viaje viaje)
+        {
+            var docRef = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("trips").Document();
+            await docRef.SetAsync(viaje);
+            return docRef.Id;
+        }
+
+        // Obtener viajes por usuario
+        public async Task<List<Viaje>> GetTripsAsync(string userId)
+        {
+            var query = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("trips");
+            var snapshot = await query.GetSnapshotAsync();
+            var viajes = new List<Viaje>();
+            foreach (var doc in snapshot.Documents)
+            {
+                var v = doc.ConvertTo<Viaje>();
+                v.Id = doc.Id; // si agregas Id en Viaje
+                viajes.Add(v);
+            }
+            return viajes;
+        }
+
     }
 }

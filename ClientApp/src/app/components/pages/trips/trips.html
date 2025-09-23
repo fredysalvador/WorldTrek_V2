@@ -10,30 +10,32 @@
   </button>
 
   <!-- Formulario -->
-  <div *ngIf="showForm" class="card p-3 mb-4">
+  <div *ngIf="showForm" class="card p-3 mb-4 shadow-sm">
     <h5 class="card-title">Agregar Nuevo Viaje</h5>
     <form (ngSubmit)="agregarViaje()">
       <div class="mb-2">
         <label>País de destino</label>
-        <select [(ngModel)]="nuevo.destino" name="destino" class="form-select">
+        <select [(ngModel)]="nuevo.destino" name="destino" class="form-select" required>
           <option value="">Selecciona un país</option>
-          <option *ngFor="let pais of paisesDisponibles" [value]="pais">{{ pais }}</option>
+          <option *ngFor="let pais of paisesDisponibles" [value]="pais.name.common">
+            {{ pais.name.common }} <span *ngIf="favoritosUsuario.has(pais.cca3)">★</span>
+          </option>
         </select>
       </div>
 
       <div class="mb-2">
         <label>Fecha de salida</label>
-        <input type="date" [(ngModel)]="nuevo.fechaSalida" name="fechaSalida" class="form-control">
+        <input type="date" [(ngModel)]="nuevo.fechaSalida" name="fechaSalida" class="form-control" required>
       </div>
 
       <div class="mb-2">
         <label>Fecha de retorno</label>
-        <input type="date" [(ngModel)]="nuevo.fechaRetorno" name="fechaRetorno" class="form-control">
+        <input type="date" [(ngModel)]="nuevo.fechaRetorno" name="fechaRetorno" class="form-control" required>
       </div>
 
       <div class="mb-2">
         <label>Título del viaje</label>
-        <input type="text" [(ngModel)]="nuevo.titulo" name="titulo" class="form-control">
+        <input type="text" [(ngModel)]="nuevo.titulo" name="titulo" class="form-control" required>
       </div>
 
       <div class="mb-2">
@@ -42,13 +44,20 @@
       </div>
 
       <button type="submit" class="btn btn-primary mt-2">Agregar</button>
+      <button type="button" class="btn btn-secondary mt-2 ms-2" (click)="showForm=false">Cancelar</button>
     </form>
   </div>
 
   <!-- Listado de viajes -->
   <div *ngFor="let trip of trips" class="card mb-3 shadow-sm p-3">
-    <h5 class="card-title">{{ trip.destination }}</h5>
-    <p class="card-text"><strong>Fecha:</strong> {{ trip.date }}</p>
-    <p class="card-text"><strong>Notas:</strong> {{ trip.notes }}</p>
+    <h5 class="card-title">{{ trip.titulo }} - {{ trip.destino }}</h5>
+    <p class="card-text">
+      <strong>Fecha:</strong>
+      {{ trip.fechaSalida | date:'dd/MM/yyyy' }} - {{ trip.fechaRetorno | date:'dd/MM/yyyy' }}
+    </p>
+    <p class="card-text" *ngIf="trip.notas">
+      <strong>Notas:</strong> {{ trip.notas }}
+    </p>
   </div>
+
 </div>
