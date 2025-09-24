@@ -14,7 +14,7 @@
     <h5 class="card-title">
       {{ nuevo.id ? 'Editar Viaje' : 'Agregar Nuevo Viaje' }}
     </h5>
-    <form (ngSubmit)="agregarViaje()">
+    <form (ngSubmit)="agregarViaje()" #formularioViaje>
       <div class="mb-2">
         <label>País de destino</label>
         <select [(ngModel)]="nuevo.destino" name="destino" class="form-select" required>
@@ -37,7 +37,7 @@
 
       <div class="mb-2">
         <label>Título del viaje</label>
-        <input type="text" [(ngModel)]="nuevo.titulo" name="titulo" class="form-control" required>
+        <input #tituloInput type="text" [(ngModel)]="nuevo.titulo" name="titulo" class="form-control" required>
       </div>
 
       <div class="mb-2">

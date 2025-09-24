@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -30,6 +30,8 @@ export class TripsComponent implements OnInit {
   favoritosUsuario: Set<string> = new Set();
   paisesDisponibles: Country[] = [];
   showForm = false;
+
+  @ViewChild('tituloInput') tituloInput!: ElementRef;
 
   nuevo: Viaje = {
     destino: '',
@@ -96,11 +98,19 @@ export class TripsComponent implements OnInit {
 
   nuevoViaje() {
     this.showForm = true;
+    setTimeout(() => {
+      this.tituloInput?.nativeElement.focus();
+      this.tituloInput?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   }
 
   editarViaje(trip: Viaje) {
     this.nuevo = { ...trip }; // clonar datos
     this.showForm = true;
+    setTimeout(() => {
+      this.tituloInput?.nativeElement.focus();
+      this.tituloInput?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
   }
 
   agregarViaje() {
