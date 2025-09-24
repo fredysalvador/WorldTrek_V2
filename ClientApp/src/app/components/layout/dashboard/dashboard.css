@@ -1,19 +1,83 @@
-.dashboard-wrapper {
+/* Layout base */
+.dashboard-container {
   min-height: 100vh;
+  background: linear-gradient(to bottom right, #f0f4ff, #e9f5ff);
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Título con degradado en el ícono */
+.text-gradient {
+  background: linear-gradient(45deg, #007bff, #6610f2);
+  background-clip: text;           /* estándar */
+  -webkit-background-clip: text;   /* compatibilidad Chrome/Safari */
+  color: transparent;              /* fallback */
+  -webkit-text-fill-color: transparent; /* necesario en Safari */
+}
+
+
+/* Botón cerrar sesión con degradado */
+.btn-gradient {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  border: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-gradient:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones de navegación tipo card */
+.btn-card {
+  min-width: 200px;
+  background: #ffffff;
+  border: 2px solid transparent;
+  color: #333;
+  font-weight: 600;
+  border-radius: 15px;
+  padding: 18px 24px;
+  transition: all 0.25s ease;
+}
+.btn-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #2575fc;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background: #f8faff;
+}
+
+/* Animaciones de fade/slide */
+.animate-fade {
+  animation: fadeIn 0.7s ease-in-out;
+}
+.animate-fade-down {
+  animation: fadeDown 0.7s ease-in-out;
+}
+.animate-slide-up {
+  animation: slideUp 0.7s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Spinner overlay */
+.spinner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.75);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  text-align: center;
-}
-h1 i {
-  margin-right: 10px;
-}
-
-.btn i {
-  pointer-events: none;
-}
-
-.btn-lg {
-  min-width: 180px;
+  border-radius: 10px;
+  z-index: 10;
 }

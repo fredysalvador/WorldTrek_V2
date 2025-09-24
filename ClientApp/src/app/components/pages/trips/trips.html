@@ -11,7 +11,9 @@
 
   <!-- Formulario -->
   <div *ngIf="showForm" class="card p-3 mb-4 shadow-sm">
-    <h5 class="card-title">Agregar Nuevo Viaje</h5>
+    <h5 class="card-title">
+      {{ nuevo.id ? 'Editar Viaje' : 'Agregar Nuevo Viaje' }}
+    </h5>
     <form (ngSubmit)="agregarViaje()">
       <div class="mb-2">
         <label>País de destino</label>
@@ -43,8 +45,10 @@
         <textarea [(ngModel)]="nuevo.notas" name="notas" class="form-control"></textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary mt-2">Agregar</button>
-      <button type="button" class="btn btn-secondary mt-2 ms-2" (click)="showForm=false">Cancelar</button>
+      <button type="submit" class="btn btn-primary mt-2">
+        {{ nuevo.id ? 'Actualizar' : 'Agregar' }}
+      </button>
+      <button type="button" class="btn btn-secondary mt-2 ms-2" (click)="resetForm()">Cancelar</button>
     </form>
   </div>
 
@@ -58,6 +62,10 @@
     <p class="card-text" *ngIf="trip.notas">
       <strong>Notas:</strong> {{ trip.notas }}
     </p>
+
+    <!-- Botones Editar / Borrar -->
+    <button class="btn btn-warning btn-sm me-2" (click)="editarViaje(trip)">✏️ Editar</button>
+    <button class="btn btn-danger btn-sm" (click)="borrarViaje(trip)">🗑️ Borrar</button>
   </div>
 
 </div>

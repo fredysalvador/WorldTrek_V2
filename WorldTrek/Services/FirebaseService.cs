@@ -61,7 +61,9 @@ namespace WorldTrek.Services
 
                 Console.WriteLine("Firebase inicializado correctamente.");
 
-            }catch (Exception ex){ 
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine($"Error inicializando Firebase: {ex.Message}");
                 Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 throw;
@@ -167,6 +169,33 @@ namespace WorldTrek.Services
             }
             return viajes;
         }
+
+        // Editar viaje
+        public async Task<bool> UpdateTripAsync(string userId, string tripId, Viaje viaje)
+        {
+            var docRef = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("trips").Document(tripId);
+
+            var snapshot = await docRef.GetSnapshotAsync();
+            if (!snapshot.Exists) return false;
+
+            await docRef.SetAsync(viaje, SetOptions.Overwrite); // sobrescribe el doc
+            return true;
+        }
+
+        // Borrar viaje
+        public async Task<bool> DeleteTripAsync(string userId, string tripId)
+        {
+            var docRef = _firestoreDb.Collection("users").Document(userId)
+                                     .Collection("trips").Document(tripId);
+
+            var snapshot = await docRef.GetSnapshotAsync();
+            if (!snapshot.Exists) return false;
+
+            await docRef.DeleteAsync();
+            return true;
+        }
+
 
     }
 }

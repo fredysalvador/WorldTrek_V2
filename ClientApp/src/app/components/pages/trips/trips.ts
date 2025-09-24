@@ -98,6 +98,11 @@ export class TripsComponent implements OnInit {
     this.showForm = true;
   }
 
+  editarViaje(trip: Viaje) {
+    this.nuevo = { ...trip }; // clonar datos
+    this.showForm = true;
+  }
+
   agregarViaje() {
     if (!this.nuevo.destino || !this.nuevo.fechaSalida || !this.nuevo.fechaRetorno || !this.nuevo.titulo) {
       alert('Por favor completa todos los campos.');
@@ -109,25 +114,65 @@ export class TripsComponent implements OnInit {
       return;
     }
 
-    // Convertir fechas a ISO para backend
     const viajeParaGuardar = {
       ...this.nuevo,
       fechaSalida: new Date(this.nuevo.fechaSalida).toISOString(),
       fechaRetorno: new Date(this.nuevo.fechaRetorno).toISOString()
     };
 
-    this.http.post<{ id: string }>(`https://localhost:7236/api/trips/${this.userId}`, viajeParaGuardar)
-      .subscribe({
+    if (this.nuevo.id) {
+      // EDITAR
+      this.http.put<{ message: string }>(
+        `https://localhost:7236/api/trips/${this.userId}/${this.nuevo.id}`,
+        viajeParaGuardar
+      ).subscribe({
+        next: () => {
+          const index = this.trips.findIndex(t => t.id === this.nuevo.id);
+          if (index !== -1) this.trips[index] = { ...this.nuevo };
+          this.resetForm();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al actualizar el viaje ❌');
+        }
+      });
+    } else {
+      // NUEVO
+      this.http.post<{ id: string }>(
+        `https://localhost:7236/api/trips/${this.userId}`,
+        viajeParaGuardar
+      ).subscribe({
         next: (res) => {
           this.trips.push({ id: res.id, ...this.nuevo });
-          this.nuevo = { destino: '', fechaSalida: '', fechaRetorno: '', titulo: '', notas: '' };
-          this.showForm = false;
+          this.resetForm();
         },
         error: (err) => {
           console.error(err);
           alert('Error al guardar el viaje ❌');
         }
       });
+    }
+  }
+
+  borrarViaje(trip: Viaje) {
+    if (!confirm(`¿Seguro que deseas eliminar el viaje "${trip.titulo}"?`)) return;
+
+    this.http.delete<{ message: string }>(
+      `https://localhost:7236/api/trips/${this.userId}/${trip.id}`
+    ).subscribe({
+      next: () => {
+        this.trips = this.trips.filter(t => t.id !== trip.id);
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Error al eliminar el viaje ❌');
+      }
+    });
+  }
+
+  resetForm() {
+    this.nuevo = { destino: '', fechaSalida: '', fechaRetorno: '', titulo: '', notas: '' };
+    this.showForm = false;
   }
 
   cargarViajes() {

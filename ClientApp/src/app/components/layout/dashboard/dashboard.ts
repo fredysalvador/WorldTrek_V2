@@ -15,22 +15,23 @@ export class Dashboard {
   mostrarViajes = false;
   mostrarAjustes = false;
   mostrarPaises = false;
+  cargando = false;
 
-  /** Alterna las secciones visibles dentro del dashboard */
+  /** Alterna las secciones visibles con un pequeño delay para el spinner */
   alternar(seccion: string) {
-    this.mostrarViajes = seccion === 'viajes';
-    this.mostrarAjustes = seccion === 'ajustes';
-    this.mostrarPaises = seccion === 'paises';
+    this.cargando = true;
+    setTimeout(() => {
+      this.mostrarViajes = seccion === 'viajes';
+      this.mostrarAjustes = seccion === 'ajustes';
+      this.mostrarPaises = seccion === 'paises';
+      this.cargando = false;
+    }, 600);
   }
 
-  /** Cierra la sesión y redirige a login.html en wwwroot */
+  /** Cierra sesión y redirige a login.html */
   cerrarSesion() {
-  // Limpiar datos de sesión
-  localStorage.removeItem('userData');
-  localStorage.removeItem('userToken');
-
-  // Redirección absoluta correcta
-  window.location.href = window.location.origin + '/login.html';
-}
-
+    localStorage.removeItem('userData');
+    localStorage.removeItem('userToken');
+    window.location.href = window.location.origin + '/login.html';
+  }
 }

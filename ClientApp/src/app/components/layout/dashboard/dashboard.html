@@ -1,38 +1,45 @@
-<div class="dashboard-container">
-  <!-- Encabezado -->
-  <header class="d-flex justify-content-between align-items-center mb-4">
-    <h1 class="display-5 fw-bold text-primary">
-      <i class="fas fa-tachometer-alt me-2"></i> Centro de Control
-    </h1>
+<div class="dashboard-container container-fluid py-4 px-4">
+ 
+  <header class="d-flex justify-content-between align-items-center mb-4 animate-fade-down">
+  <h1 class="display-5 fw-bold d-flex align-items-center">
+    <i class="fas fa-compass me-2 text-gradient"></i>
+    Centro de Control
+  </h1>
 
-    <!-- Botón cerrar sesión -->
-    <button class="btn btn-gradient" (click)="cerrarSesion()">
-      <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
-    </button>
-  </header>
+  <!-- Botón cerrar sesión -->
+  <button class="btn btn-gradient shadow-sm px-4" (click)="cerrarSesion()">
+    <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+  </button>
+</header>
+
 
   <!-- Texto de bienvenida -->
-  <p class="lead text-muted mb-4">
-    ¡Bienvenido! Administra tus viajes, países y configuraciones desde aquí.
+  <p class="lead text-muted mb-4 animate-fade">
+    ¡Bienvenido! Administra tus <strong>viajes</strong>, <strong>países</strong> y <strong>configuraciones</strong> desde aquí.
   </p>
 
   <!-- Botones de navegación -->
-  <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
-    <button class="btn btn-success btn-lg shadow" (click)="alternar('viajes')">
+  <div class="d-flex flex-wrap gap-3 justify-content-center mt-4 animate-slide-up">
+    <button class="btn btn-card shadow btn-lg" (click)="alternar('viajes')">
       <i class="fas fa-plane me-2"></i> Nuevo Viaje
     </button>
-    <button class="btn btn-warning btn-lg shadow text-dark" (click)="alternar('ajustes')">
+    <button class="btn btn-card shadow btn-lg" (click)="alternar('ajustes')">
       <i class="fas fa-cogs me-2"></i> Ajustes
     </button>
-    <button class="btn btn-info btn-lg shadow text-white" (click)="alternar('paises')">
+    <button class="btn btn-card shadow btn-lg" (click)="alternar('paises')">
       <i class="fas fa-globe-americas me-2"></i> Países
     </button>
   </div>
 
   <!-- Contenido dinámico -->
-  <div class="dashboard-components mt-5 p-3 bg-light rounded shadow-sm animate-fade">
-    <app-trips *ngIf="mostrarViajes"></app-trips>
-    <app-settings *ngIf="mostrarAjustes"></app-settings>
-    <app-countries *ngIf="mostrarPaises"></app-countries>
+  <div class="dashboard-components mt-5 p-4 bg-light rounded shadow-sm position-relative animate-fade">
+    <!-- Spinner de carga -->
+    <div class="spinner-overlay" *ngIf="cargando">
+      <div class="spinner-border text-primary" role="status"></div>
+    </div>
+
+    <app-trips *ngIf="mostrarViajes && !cargando"></app-trips>
+    <app-settings *ngIf="mostrarAjustes && !cargando"></app-settings>
+    <app-countries *ngIf="mostrarPaises && !cargando"></app-countries>
   </div>
 </div>
