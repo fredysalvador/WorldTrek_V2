@@ -1,39 +1,38 @@
-<div class="container py-5">
-  <div class="row">
-    <div class="col-12 text-center">
-      <h1 class="display-4 fw-bold text-primary">
-        <i class="fas fa-tachometer-alt me-2"></i> Centro de Control
-      </h1>
-      <p class="lead mt-3 text-muted">
-        ¡Bienvenido! Este es tu espacio para tomar decisiones, gestionar tu aplicación y mantener todo bajo control.
-      </p>
+<div class="dashboard-container">
+  <!-- Encabezado -->
+  <header class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="display-5 fw-bold text-primary">
+      <i class="fas fa-tachometer-alt me-2"></i> Centro de Control
+    </h1>
 
-      <!-- Botones -->
-      <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap">
-        <button class="btn btn-success btn-lg" (click)="alternar('viajes')">
-          <i class="fas fa-plane me-2"></i> Nuevo Viaje
-        </button>
-        <button class="btn btn-warning btn-lg text-dark" (click)="alternar('ajustes')">
-          <i class="fas fa-cogs me-2"></i> Ajustes del Sistema
-        </button>
-        <button class="btn btn-info btn-lg text-white" (click)="alternar('paises')">
-          <i class="fas fa-globe-americas me-2"></i> Países y Regiones
-        </button>
-      </div>
+    <!-- Botón cerrar sesión -->
+    <button class="btn btn-gradient" (click)="cerrarSesion()">
+      <i class="fas fa-sign-out-alt me-2"></i> Cerrar Sesión
+    </button>
+  </header>
 
-      <!-- Contenedores -->
-      <div class="dashboard-components mt-4">
-        <app-trips *ngIf="mostrarViajes"></app-trips>
-        <app-settings *ngIf="mostrarAjustes"></app-settings>
-        <app-countries *ngIf="mostrarPaises"></app-countries>
+  <!-- Texto de bienvenida -->
+  <p class="lead text-muted mb-4">
+    ¡Bienvenido! Administra tus viajes, países y configuraciones desde aquí.
+  </p>
 
- <div class="mt-5">
-        <p class="text-secondary fst-italic">
-          “La administración efectiva no es solo controlar, sino empoderar.” 🌟
-        </p>
-      </div>
+  <!-- Botones de navegación -->
+  <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+    <button class="btn btn-success btn-lg shadow" (click)="alternar('viajes')">
+      <i class="fas fa-plane me-2"></i> Nuevo Viaje
+    </button>
+    <button class="btn btn-warning btn-lg shadow text-dark" (click)="alternar('ajustes')">
+      <i class="fas fa-cogs me-2"></i> Ajustes
+    </button>
+    <button class="btn btn-info btn-lg shadow text-white" (click)="alternar('paises')">
+      <i class="fas fa-globe-americas me-2"></i> Países
+    </button>
+  </div>
 
-      </div>
-    </div>
+  <!-- Contenido dinámico -->
+  <div class="dashboard-components mt-5 p-3 bg-light rounded shadow-sm animate-fade">
+    <app-trips *ngIf="mostrarViajes"></app-trips>
+    <app-settings *ngIf="mostrarAjustes"></app-settings>
+    <app-countries *ngIf="mostrarPaises"></app-countries>
   </div>
 </div>
